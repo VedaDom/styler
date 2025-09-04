@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Styler
 
-## Getting Started
+Styler is a modern salon management dashboard focused on a clean, mobile-first UX. It provides appointment insights, customer and staff management, payments, and analytics scaffolding, with secure auth and a scalable data model.
 
-First, run the development server:
+## Features
+
+- __Appointments overview__ and quick navigation
+- __Customers and staff__ sections
+- __Payments__ and __Analytics__ (scaffolded)
+- __Google Sign-In__ with NextAuth (Prisma Adapter)
+- __Mobile-optimized__ layout and KPIs
+
+## Tech Stack
+
+- __Next.js 15__ (App Router, Turbopack), __React 19__, __TypeScript__
+- __Tailwind CSS v4__, Radix UI, Lucide icons
+- __Firebase__ (client auth) and __Firebase Admin__ (server)
+- __NextAuth__ with Prisma Adapter
+- __Prisma__ (PostgreSQL)
+
+## Project Structure
+
+- `app/` — routes and pages (e.g., `app/login/page.tsx`, `app/(app)/onboarding/page.tsx`)
+- `components/` — shared UI (e.g., `components/ui/button.tsx`)
+- `lib/` — core services (`firebase.ts`, `firebaseAdmin.ts`, `auth.ts`, `db.ts`)
+- `prisma/` — schemas and migrations
+- `scripts/` — prisma build helpers
+
+## Prerequisites
+
+- Node.js 18+
+- PostgreSQL database
+- Firebase project (Web app + OAuth with Google)
+- Google Cloud Service Account (for Admin SDK)
+
+## Environment Variables
+
+Create a `.env.local` with:
+
+- __Client Firebase__
+  - `NEXT_PUBLIC_FIREBASE_API_KEY`
+  - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+  - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+  - `NEXT_PUBLIC_FIREBASE_APP_ID`
+  - `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` (optional)
+  - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` (optional)
+  - `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID` (optional)
+
+- __NextAuth__
+  - `NEXTAUTH_URL=http://localhost:3000`
+  - `NEXTAUTH_SECRET=your-strong-secret`
+  - `GOOGLE_CLIENT_ID=...`
+  - `GOOGLE_CLIENT_SECRET=...`
+
+- __Database__
+  - `DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DB?schema=public`
+
+- __Firebase Admin__ (Application Default Credentials)
+  - `GOOGLE_APPLICATION_CREDENTIALS_PATH=/absolute/path/to/service-account.json`
+  - Note: Prefer platform secret managers; do not commit JSON secrets.
+
+## Setup
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Generate Prisma client and run dev migrations:
+
+```bash
+npm run prisma:generate
+npm run prisma:migrate
+```
+
+Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Security
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Secrets are ignored via `.gitignore` (e.g., `styler-1d75b-firebase-adminsdk.json`).
+- If a secret was committed, rotate it and rewrite history (e.g., `git filter-repo`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
+- Vercel recommended. Configure all env vars (Database, NextAuth, Firebase, Admin credentials) in the platform.
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
