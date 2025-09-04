@@ -1,0 +1,17 @@
+// Domain models: Salon
+
+model Salon {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  logoUrl     String?
+  timezone    String   @default("UTC")
+  currency    String   @default("USD")
+  taxRate     Decimal? @db.Decimal(5, 2)
+
+  ownerId     String
+  owner       User     @relation("SalonOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

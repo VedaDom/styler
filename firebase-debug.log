@@ -1,0 +1,24 @@
+[debug] [2025-09-04T02:01:15.850Z] ----------------------------------------------------------------------
+[debug] [2025-09-04T02:01:15.852Z] Command:       /usr/local/bin/node /Users/wistfareltd/.npm-global/bin/firebase init
+[debug] [2025-09-04T02:01:15.852Z] CLI Version:   14.15.1
+[debug] [2025-09-04T02:01:15.852Z] Platform:      darwin
+[debug] [2025-09-04T02:01:15.852Z] Node Version:  v22.14.0
+[debug] [2025-09-04T02:01:15.853Z] Time:          Thu Sep 04 2025 04:01:15 GMT+0200 (Central Africa Time)
+[debug] [2025-09-04T02:01:15.853Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-09-04T02:01:15.854Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-09-04T02:01:15.879Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-09-04T02:01:15.879Z] > authorizing via signed-in user (nsengimanavedadom@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/wistfareltd/Documents/Streaming/Projects/styler
+
+[debug] [2025-09-04T02:01:16.600Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-09-04T02:01:16.600Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
