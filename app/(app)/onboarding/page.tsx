@@ -5,11 +5,7 @@ import { useRouter } from "next/navigation";
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Command,
   CommandEmpty,
@@ -121,7 +117,9 @@ export default function OnboardingPage() {
 
       <form onSubmit={onSubmit} className="space-y-6">
         <div className="grid gap-2">
-          <label htmlFor="name" className="text-sm">Salon name</label>
+          <label htmlFor="name" className="text-sm">
+            Salon name
+          </label>
           <Input
             id="name"
             name="name"
@@ -185,7 +183,12 @@ export default function OnboardingPage() {
                             setOpenTZ(false);
                           }}
                         >
-                          <Check className={cn("mr-2 h-4 w-4", timezone === z ? "opacity-100" : "opacity-0")} />
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              timezone === z ? "opacity-100" : "opacity-0"
+                            )}
+                          />
                           {z}
                         </CommandItem>
                       ))}

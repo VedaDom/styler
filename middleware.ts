@@ -8,7 +8,5 @@ export default function middleware() {
 
 // Protect all routes except Next internals, API auth callbacks, and static
 export const config = {
-  matcher: [
-    "/((?!_next|api/auth|api/stripe|.*\\..*|favicon.ico).*)",
-  ],
+  matcher: ["/((?!_next|api/auth|api/stripe|.*\\..*|favicon.ico).*)"],
 };

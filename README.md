@@ -4,19 +4,19 @@ Styler is a modern salon management dashboard focused on a clean, mobile-first U
 
 ## Features
 
-- __Appointments overview__ and quick navigation
-- __Customers and staff__ sections
-- __Payments__ and __Analytics__ (scaffolded)
-- __Google Sign-In__ with NextAuth (Prisma Adapter)
-- __Mobile-optimized__ layout and KPIs
+- **Appointments overview** and quick navigation
+- **Customers and staff** sections
+- **Payments** and **Analytics** (scaffolded)
+- **Google Sign-In** with NextAuth (Prisma Adapter)
+- **Mobile-optimized** layout and KPIs
 
 ## Tech Stack
 
-- __Next.js 15__ (App Router, Turbopack), __React 19__, __TypeScript__
-- __Tailwind CSS v4__, Radix UI, Lucide icons
-- __Firebase__ (client auth) and __Firebase Admin__ (server)
-- __NextAuth__ with Prisma Adapter
-- __Prisma__ (PostgreSQL)
+- **Next.js 15** (App Router, Turbopack), **React 19**, **TypeScript**
+- **Tailwind CSS v4**, Radix UI, Lucide icons
+- **Firebase** (client auth) and **Firebase Admin** (server)
+- **NextAuth** with Prisma Adapter
+- **Prisma** (PostgreSQL)
 
 ## Project Structure
 
@@ -37,7 +37,7 @@ Styler is a modern salon management dashboard focused on a clean, mobile-first U
 
 Create a `.env.local` with:
 
-- __Client Firebase__
+- **Client Firebase**
   - `NEXT_PUBLIC_FIREBASE_API_KEY`
   - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
   - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
@@ -46,16 +46,16 @@ Create a `.env.local` with:
   - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` (optional)
   - `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID` (optional)
 
-- __NextAuth__
+- **NextAuth**
   - `NEXTAUTH_URL=http://localhost:3000`
   - `NEXTAUTH_SECRET=your-strong-secret`
   - `GOOGLE_CLIENT_ID=...`
   - `GOOGLE_CLIENT_SECRET=...`
 
-- __Database__
+- **Database**
   - `DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DB?schema=public`
 
-- __Firebase Admin__ (Application Default Credentials)
+- **Firebase Admin** (Application Default Credentials)
   - `GOOGLE_APPLICATION_CREDENTIALS_PATH=/absolute/path/to/service-account.json`
   - Note: Prefer platform secret managers; do not commit JSON secrets.
 
@@ -89,6 +89,7 @@ npm run dev
 ## Deployment
 
 - Vercel recommended. Configure all env vars (Database, NextAuth, Firebase, Admin credentials) in the platform.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

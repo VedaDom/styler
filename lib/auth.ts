@@ -1,10 +1,11 @@
 import type { NextAuthOptions } from "next-auth";
+import type { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db) as unknown as any,
+  adapter: PrismaAdapter(db) as unknown as Adapter,
   session: { strategy: "database" },
   providers: [
     GoogleProvider({

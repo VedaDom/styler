@@ -5,7 +5,17 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { Bell, Calendar as CalendarIcon, Users, UserCheck, Settings, CreditCard, BarChart3, Clock, ChevronRight } from "lucide-react";
+import {
+  Bell,
+  Calendar as CalendarIcon,
+  Users,
+  UserCheck,
+  Settings,
+  CreditCard,
+  BarChart3,
+  Clock,
+  ChevronRight,
+} from "lucide-react";
 
 export default function Home() {
   const router = useRouter();
@@ -13,8 +23,21 @@ export default function Home() {
   const [salonCount, setSalonCount] = useState<number | null>(null);
   const [salonName, setSalonName] = useState<string | null>(null);
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
-  const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({ from: null, to: null });
-  const [preset, setPreset] = useState<"today" | "yesterday" | "this_week" | "last_week" | "this_month" | "last_month" | "this_year" | "last_year" | "custom">("today");
+  const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
+    from: null,
+    to: null,
+  });
+  const [preset, setPreset] = useState<
+    | "today"
+    | "yesterday"
+    | "this_week"
+    | "last_week"
+    | "this_month"
+    | "last_month"
+    | "this_year"
+    | "last_year"
+    | "custom"
+  >("today");
 
   // Format numbers with k suffix for thousands and m for millions
   const formatNumber = (num: number): string => {
@@ -64,7 +87,7 @@ export default function Home() {
 
   if (checking) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-dvh flex items-center justify-center">
         <div className="text-5xl font-extrabold tracking-tight">Styler</div>
       </div>
     );
@@ -97,9 +120,12 @@ export default function Home() {
       </header>
 
       {/* Main content placeholder */}
-      <main className="flex-1 space-y-3 sm:space-y-6 overflow-y-hidden">
+      <main className="flex-1 space-y-6 overflow-y-hidden">
         {/* Filters row */}
-        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide" style={{ width: "100%", maxWidth: "100%" }}>
+        <div
+          className="overflow-x-auto overflow-y-hidden scrollbar-hide"
+          style={{ width: "100%", maxWidth: "100%" }}
+        >
           <div className="flex items-center gap-2 px-4" style={{ width: "max-content" }}>
             {/* Calendar (custom range) */}
             <div className="relative">
@@ -144,16 +170,31 @@ export default function Home() {
                     />
                   </div>
                   <div className="flex justify-end gap-2 pt-1">
-                    <Button variant="ghost" size="sm" onClick={() => {
-                      setRange({ from: null, to: null });
-                      const el = document.getElementById("custom-range-popover") as HTMLDetailsElement | null;
-                      el?.removeAttribute("open");
-                    }}>Clear</Button>
-                    <Button size="sm" onClick={() => {
-                      // Close popover; consumers can react to range state
-                      const el = document.getElementById("custom-range-popover") as HTMLDetailsElement | null;
-                      el?.removeAttribute("open");
-                    }}>Apply</Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setRange({ from: null, to: null });
+                        const el = document.getElementById(
+                          "custom-range-popover"
+                        ) as HTMLDetailsElement | null;
+                        el?.removeAttribute("open");
+                      }}
+                    >
+                      Clear
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        // Close popover; consumers can react to range state
+                        const el = document.getElementById(
+                          "custom-range-popover"
+                        ) as HTMLDetailsElement | null;
+                        el?.removeAttribute("open");
+                      }}
+                    >
+                      Apply
+                    </Button>
                   </div>
                 </div>
               </details>
@@ -195,7 +236,8 @@ export default function Home() {
                     return e;
                   };
                   const firstDayOfMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth(), 1);
-                  const lastDayOfMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth() + 1, 0);
+                  const lastDayOfMonth = (d: Date) =>
+                    new Date(d.getFullYear(), d.getMonth() + 1, 0);
                   const firstDayOfYear = (d: Date) => new Date(d.getFullYear(), 0, 1);
                   const lastDayOfYear = (d: Date) => new Date(d.getFullYear(), 11, 31);
 
@@ -256,11 +298,17 @@ export default function Home() {
             </div>
             <div className="rounded-lg border p-2">
               <div className="text-[13px] text-muted-foreground">Revenue</div>
-              <div className="mt-0.5 text-lg font-semibold">{formatNumber(85840)} <span className="hidden sm:inline text-sm text-muted-foreground">RWF</span></div>
+              <div className="mt-0.5 text-lg font-semibold">
+                {formatNumber(85840)}{" "}
+                <span className="hidden sm:inline text-sm text-muted-foreground">RWF</span>
+              </div>
             </div>
             <div className="rounded-lg border p-2">
               <div className="text-[13px] text-muted-foreground">Expenses</div>
-              <div className="mt-0.5 text-lg font-semibold">{formatNumber(23000)} <span className="hidden sm:inline text-sm text-muted-foreground">RWF</span></div>
+              <div className="mt-0.5 text-lg font-semibold">
+                {formatNumber(23000)}{" "}
+                <span className="hidden sm:inline text-sm text-muted-foreground">RWF</span>
+              </div>
             </div>
           </div>
         </div>
@@ -271,7 +319,7 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push('/appointments')}
+              onClick={() => router.push("/appointments")}
             >
               <div className="flex items-center gap-3">
                 <Clock className="h-5 w-5" />
@@ -283,7 +331,7 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push('/customers')}
+              onClick={() => router.push("/customers")}
             >
               <div className="flex items-center gap-3">
                 <Users className="h-5 w-5" />
@@ -295,7 +343,7 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push('/staff')}
+              onClick={() => router.push("/staff")}
             >
               <div className="flex items-center gap-3">
                 <UserCheck className="h-5 w-5" />
@@ -307,7 +355,7 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push('/payments')}
+              onClick={() => router.push("/payments")}
             >
               <div className="flex items-center gap-3">
                 <CreditCard className="h-5 w-5" />
@@ -319,7 +367,7 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push('/analytics')}
+              onClick={() => router.push("/analytics")}
             >
               <div className="flex items-center gap-3">
                 <BarChart3 className="h-5 w-5" />
@@ -331,7 +379,7 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push('/settings')}
+              onClick={() => router.push("/settings")}
             >
               <div className="flex items-center gap-3">
                 <Settings className="h-5 w-5" />

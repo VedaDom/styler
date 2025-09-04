@@ -12,9 +12,7 @@ async function main() {
   let modelFiles = [];
   try {
     const entries = await fs.readdir(modelsDir);
-    modelFiles = entries
-      .filter((f) => f.endsWith(".prisma"))
-      .sort();
+    modelFiles = entries.filter((f) => f.endsWith(".prisma")).sort();
   } catch (e) {
     // no models dir is okay
   }

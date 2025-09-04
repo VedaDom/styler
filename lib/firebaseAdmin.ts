@@ -7,8 +7,7 @@ if (
   !process.env.GOOGLE_APPLICATION_CREDENTIALS &&
   process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH
 ) {
-  process.env.GOOGLE_APPLICATION_CREDENTIALS =
-    process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH;
+  process.env.GOOGLE_APPLICATION_CREDENTIALS = process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH;
 }
 
 // Initialize Admin SDK once using Application Default Credentials (ADC).

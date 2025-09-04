@@ -64,7 +64,11 @@ export async function POST(req: Request) {
     const image = decoded.picture ?? null;
     await db.user.upsert({
       where: { id: uid },
-      update: { email: email ?? undefined, name: displayName ?? undefined, image: image ?? undefined },
+      update: {
+        email: email ?? undefined,
+        name: displayName ?? undefined,
+        image: image ?? undefined,
+      },
       create: { id: uid, email, name: displayName, image },
     });
 
