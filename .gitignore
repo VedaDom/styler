@@ -42,3 +42,4 @@ next-env.d.ts
 
 # prisma (generated)
 prisma/schema.prisma
+styler-1d75b-firebase-adminsdk.json
