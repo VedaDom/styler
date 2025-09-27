@@ -2,7 +2,10 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    // @ts-expect-error: allowedDevOrigins is supported at runtime but not yet in the DefinitelyTyped/Next.js types
+    allowedDevOrigins: ["http://192.168.1.65:3000"],
+  },
 };
 
 export default withSentryConfig(nextConfig, {

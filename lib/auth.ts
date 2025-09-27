@@ -16,10 +16,24 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user }) {
       if (session.user) {
+        // Try to use the user provided by NextAuth first
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (session.user as any).id = (user as any).id;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (session.user as any).role = (user as any).role;
+        const existingId = (user as any)?.id as string | undefined;
+        if (existingId) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (session.user as any).id = existingId;
+          return session;
+        }
+
+        // Fallback: look up the user by email to attach the id for database strategy
+        const email = session.user.email ?? undefined;
+        if (email) {
+          const dbUser = await db.user.findUnique({ where: { email }, select: { id: true } });
+          if (dbUser?.id) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (session.user as any).id = dbUser.id;
+          }
+        }
       }
       return session;
     },

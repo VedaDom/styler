@@ -1,0 +1,27 @@
+// Invitations to join a salon
+
+model Invite {
+  id               String   @id @default(cuid())
+  token            String   @unique
+
+  // Who is being invited
+  email            String?
+  phone            String?
+
+  role             Role     @default(STAFF)
+
+  salonId          String
+  salon            Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+
+  createdByUserId  String
+  createdBy        User     @relation(fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  acceptedAt       DateTime?
+  acceptedByUserId String?
+  acceptedBy       User?    @relation("InviteAcceptedBy", fields: [acceptedByUserId], references: [id])
+
+  expiresAt        DateTime
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

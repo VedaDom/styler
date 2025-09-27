@@ -22,6 +22,7 @@ export default function Home() {
   const [checking, setChecking] = useState(true);
   const [salonCount, setSalonCount] = useState<number | null>(null);
   const [salonName, setSalonName] = useState<string | null>(null);
+  const [salonId, setSalonId] = useState<string | null>(null);
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
   const [range, setRange] = useState<{ from: Date | null; to: Date | null }>({
     from: null,
@@ -75,7 +76,9 @@ export default function Home() {
           router.replace("/onboarding");
           return;
         }
-        setSalonName(data.salons[0]?.name ?? null);
+        const firstSalon = data.salons[0];
+        setSalonName(firstSalon?.name ?? null);
+        setSalonId(firstSalon?.id ?? null);
         setSalonCount(count);
         setChecking(false);
       } catch {
@@ -343,7 +346,11 @@ export default function Home() {
             <Button
               variant="ghost"
               className="w-full h-10 sm:h-12 justify-between gap-2"
-              onClick={() => router.push("/staff")}
+              onClick={() => {
+                if (salonId) {
+                  router.push(`/salon/${salonId}/staff`);
+                }
+              }}
             >
               <div className="flex items-center gap-3">
                 <UserCheck className="h-5 w-5" />

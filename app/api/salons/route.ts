@@ -53,9 +53,28 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const name = typeof body?.name === "string" ? body.name.trim() : "";
     const timezone = typeof body?.timezone === "string" ? body.timezone.trim() : "";
+    const currencyRaw = typeof body?.currency === "string" ? body.currency.trim().toUpperCase() : "";
+    const taxRateRaw =
+      typeof body?.taxRate === "number"
+        ? body.taxRate
+        : typeof body?.taxRate === "string" && body.taxRate.trim() !== ""
+        ? Number(body.taxRate)
+        : null;
 
     if (!name || !timezone) {
       return NextResponse.json({ error: "Missing name or timezone" }, { status: 400 });
+    }
+
+    // Validate optional currency (ISO-4217-ish simple check)
+    const currency = currencyRaw && /^[A-Z]{3}$/.test(currencyRaw) ? currencyRaw : undefined;
+
+    // Validate optional tax rate (0-100)
+    let taxRate: number | null = null;
+    if (typeof taxRateRaw === "number" && !Number.isNaN(taxRateRaw)) {
+      if (taxRateRaw < 0 || taxRateRaw > 100) {
+        return NextResponse.json({ error: "Invalid taxRate; expected 0-100" }, { status: 400 });
+      }
+      taxRate = Number(taxRateRaw.toFixed(2));
     }
 
     // Ensure user exists
@@ -72,15 +91,26 @@ export async function POST(req: Request) {
       create: { id: uid, email, name: displayName, image },
     });
 
-    const salon = await db.salon.create({
-      data: {
-        name,
-        timezone,
-        ownerId: uid,
-      },
+    // Create the salon and create an OWNER membership for the creator
+    const result = await db.$transaction(async (tx) => {
+      const salon = await tx.salon.create({
+        data: {
+          name,
+          timezone,
+          ownerId: uid,
+          ...(currency ? { currency } : {}),
+          ...(taxRate !== null ? { taxRate } : {}),
+        },
+      });
+      await tx.salonMember.upsert({
+        where: { userId_salonId: { userId: uid, salonId: salon.id } },
+        update: { role: "OWNER" },
+        create: { userId: uid, salonId: salon.id, role: "OWNER" },
+      });
+      return { salon };
     });
 
-    return NextResponse.json({ salon }, { status: 201 });
+    return NextResponse.json({ salon: result.salon }, { status: 201 });
   } catch (err) {
     console.error("/api/salons POST error", err);
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

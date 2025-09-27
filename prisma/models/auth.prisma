@@ -7,12 +7,16 @@ model User {
   emailVerified DateTime?
   image         String?
 
-  // Basic role for RBAC
-  role          Role     @default(CUSTOMER)
-
   accounts      Account[]
   sessions      Session[]
   salonsOwned   Salon[]  @relation("SalonOwner")
+
+  // Memberships (per-salon roles)
+  memberships  SalonMember[]
+
+  // Invites relations
+  invitesCreated  Invite[]
+  invitesAccepted Invite[] @relation("InviteAcceptedBy")
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

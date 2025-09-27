@@ -12,6 +12,9 @@ model Salon {
   ownerId     String
   owner       User     @relation("SalonOwner", fields: [ownerId], references: [id], onDelete: Cascade)
 
+  invites     Invite[]
+  memberships SalonMember[]
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

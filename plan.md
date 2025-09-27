@@ -248,8 +248,28 @@
 - [ ] M1: Auth + Onboarding
   - [x] NextAuth with Google provider
   - [ ] Role model (Owner/Manager/Receptionist/Staff/Customer)
-  - [ ] Onboarding wizard: profile, timezone, hours, policies, tax
-  - [ ] Invite staff via email
+    - [x] OWNER role auto-assigned on salon creation
+  - [x] Onboarding wizard: profile, timezone
+  - [ ] Invite staff via email or SMS using pindo api
+    - [ ] API: Create invite model (token, salon_id, role, email/phone, expires_at, accepted_at)
+    - [ ] API: POST /api/invites to create and send invite (email via Resend, SMS via Pindo)
+    - [ ] API: GET /api/invites/:token to validate token
+    - [ ] API: POST /api/invites/:token/accept to create/link user and assign role
+    - [ ] UI: Owner flows to issue, list, revoke invites (basic list + revoke)
+    - [ ] UI: Accept invite page (login with Google or continue to create account)
+  - [ ] RBAC guards on server actions and protected routes (Owner/Manager scopes)
+    - [ ] Helper: requireRole(userId, role[]) in `lib/rbac.ts`
+    - [ ] Apply to sensitive routes (invites, salon update, staff mgmt)
+  - [ ] Settings: Business basics (currency, tax, hours later)
+    - [ ] API: PATCH /api/salons/:id to update currency and taxRate
+    - [ ] UI: Settings > Business to edit currency and tax
+  - [ ] Telemetry & Errors: add meaningful toasts and Sentry breadcrumbs around onboarding/ invites
+
+  - Acceptance Criteria (M1)
+    - [ ] A new user can sign in with Google, create a salon by providing name and timezone, and land on dashboard
+    - [ ] The creating user is assigned OWNER role automatically
+    - [ ] OWNER can send an invite to a staff email or phone and the recipient can accept to join the salon
+    - [ ] Unauthorized users cannot access protected endpoints (invites, salon mutations)
 
 ### Next Priorities
 

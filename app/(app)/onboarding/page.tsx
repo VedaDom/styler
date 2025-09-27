@@ -98,7 +98,6 @@ export default function OnboardingPage() {
       router.push("/");
       router.refresh();
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error("Create salon failed", err);
       const message = (err as Error).message || "Failed to continue";
       toast.error("Could not create salon", { description: message });

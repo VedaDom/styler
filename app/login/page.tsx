@@ -1,24 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "@/lib/firebase";
-import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const params = useSearchParams();
+  const callbackUrl = params.get("callbackUrl") || "/";
 
   const onGoogle = async () => {
-    try {
-      setLoading(true);
-      await signInWithPopup(auth, googleProvider);
-      window.location.href = "/";
-    } catch (e) {
-      const message = (e as Error)?.message || "Sign-in failed";
-      toast.error("Google sign-in failed", { description: message });
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    // Use NextAuth's Google provider; NextAuth will handle redirects & session creation
+    await signIn("google", { callbackUrl });
+    setLoading(false);
   };
 
   return (
